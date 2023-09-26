@@ -1,8 +1,10 @@
 import com.jmurienega.demo.domain.entity.User
+import com.jmurienega.demo.domain.model.UserLoginResponse
+import com.jmurienega.demo.domain.model.UserSignUpRequest
+import com.jmurienega.demo.domain.model.UserSignUpResponse
 import com.jmurienega.demo.domain.repository.UserRepository
-import com.jmurienega.demo.model.UserSignUpRequest
-import com.jmurienega.demo.model.UserSignUpResponse
-import com.jmurienega.demo.service.UserService
+import com.jmurienega.demo.domain.service.UserService
+
 import spock.lang.Specification
 import spock.lang.Unroll
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -117,6 +119,23 @@ public class UserServiceSpecification extends Specification  {
 		then:
 		thrown DataIntegrityViolationException
 
+		
+	}
+	
+	@Unroll
+	def "should expect login user"(){
+		given:
+		UserSignUpRequest userRequest = new UserSignUpRequest()
+		userRequest.setName("test")
+		userRequest.setEmail("maillogint@mail.com")
+		userRequest.setPassword("aa18aaaaF")
+		UserSignUpResponse responseSignUp = userService.createUser(userRequest)
+		when:
+		UserLoginResponse responseLogin = userService.login(responseSignUp.getToken())
+		
+		
+		then:
+		noExceptionThrown()
 		
 	}
 }

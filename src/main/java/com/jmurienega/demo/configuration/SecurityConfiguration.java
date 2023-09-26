@@ -55,7 +55,7 @@ public class SecurityConfiguration {
 				.exceptionHandling(handling -> handling.authenticationEntryPoint(authenticationEntryPoint))
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
-						// .antMatchers("/sign-up").permitAll().antMatchers("/swagger-ui/*").permitAll()
+						.antMatchers("/sign-up").permitAll().antMatchers("/swagger-ui/*").permitAll()
 						.antMatchers(HttpMethod.GET, "/api/v1/**").permitAll().antMatchers("/api/v1/auth/**")
 						.permitAll().antMatchers("/v2/api-docs/**").permitAll().antMatchers("/swagger-ui/**")
 						.permitAll().antMatchers("/users/sign-up").permitAll().antMatchers("/h2-console/**").permitAll()
@@ -78,5 +78,6 @@ public class SecurityConfiguration {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
+
 
 }

@@ -2,12 +2,17 @@ package com.jmurienega.demo.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.jmurienega.demo.exceptionhandling.CustomUserException;
+import com.jmurienega.demo.exceptionhandling.RestExceptionHandler;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,6 +28,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+    
+    @Autowired
+    private RestExceptionHandler resolver;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -34,16 +42,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           
             String email = tokenProvider.getUserEmailFromJWT(token);
             // load user associated with token
+            
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
-
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userDetails, null, userDetails.getAuthorities()
             );
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             // set spring security
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);  
         }
         filterChain.doFilter(request, response);
+        
     }
 
     // Bearer <accessToken>

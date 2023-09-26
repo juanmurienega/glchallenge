@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.jmurienega.demo.domain.entity.User;
 import com.jmurienega.demo.domain.repository.UserRepository;
+import com.jmurienega.demo.exceptionhandling.CustomUserException;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

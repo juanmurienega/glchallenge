@@ -1,4 +1,4 @@
-package com.jmurienega.demo.service;
+package com.jmurienega.demo.domain.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.jmurienega.demo.domain.entity.User;
+import com.jmurienega.demo.domain.model.UserLoginResponse;
+import com.jmurienega.demo.domain.model.UserSignUpRequest;
+import com.jmurienega.demo.domain.model.UserSignUpResponse;
 import com.jmurienega.demo.domain.repository.UserRepository;
 import com.jmurienega.demo.exceptionhandling.CustomUserException;
-import com.jmurienega.demo.model.UserLoginResponse;
-import com.jmurienega.demo.model.UserSignUpRequest;
-import com.jmurienega.demo.model.UserSignUpResponse;
 import com.jmurienega.demo.security.JwtUtils;
 
 @Service
@@ -46,6 +46,7 @@ public class UserService {
 	}
 
 	public UserSignUpResponse createUser(@Valid UserSignUpRequest newUser) throws CustomUserException {
+		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		User user = this.modelMapper.map(newUser, User.class);
 		user.setPassword(encoder.encode(newUser.getPassword()));
 		user.setCreated(LocalDateTime.now());
@@ -60,8 +61,8 @@ public class UserService {
 	}
 
 	public UserLoginResponse login(String token) throws CustomUserException {
-		String userName = jwtUtils.getUserEmailFromJWT(token);
-		User user = this.userRepository.findByEmail(userName);
+		String email = jwtUtils.getUserEmailFromJWT(token);
+		User user = this.userRepository.findByEmail(email);
 		
 		if (user == null) {
 			

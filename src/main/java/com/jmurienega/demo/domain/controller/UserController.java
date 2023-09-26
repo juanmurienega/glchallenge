@@ -1,4 +1,4 @@
-package com.jmurienega.demo.controller;
+package com.jmurienega.demo.domain.controller;
 
 import javax.validation.Valid;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jmurienega.demo.model.UserLoginResponse;
-import com.jmurienega.demo.model.UserSignUpRequest;
-import com.jmurienega.demo.model.UserSignUpResponse;
-import com.jmurienega.demo.service.UserService;
+import com.jmurienega.demo.domain.model.UserLoginResponse;
+import com.jmurienega.demo.domain.model.UserSignUpRequest;
+import com.jmurienega.demo.domain.model.UserSignUpResponse;
+import com.jmurienega.demo.domain.service.UserService;
 
 @RestController
 @RequestMapping("users")

@@ -1,4 +1,4 @@
-package com.jmurienega.demo.model;
+package com.jmurienega.demo.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
