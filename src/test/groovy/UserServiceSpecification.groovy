@@ -25,6 +25,33 @@ public class UserServiceSpecification extends Specification  {
 	@Autowired
 	UserService userService 
 	
+	@Unroll
+	def "should expect an Exception to be throw for invalid input: email is null"(){
+		given:
+		UserSignUpRequest userRequest = new UserSignUpRequest()
+		userRequest.setName("test")
+		userRequest.setPassword("aa18aaaaF")
+		when:
+		UserSignUpResponse response = userService.createUser(userRequest)
+		
+		then:
+		thrown ConstraintViolationException
+
+	}
+	
+	@Unroll
+	def "should expect an Exception to be throw for invalid input: name is null"(){
+		given:
+		UserSignUpRequest userRequest = new UserSignUpRequest()
+		userRequest.setEmail("mail@mail.com")
+		userRequest.setPassword("aa18aaaaF")
+		when:
+		UserSignUpResponse response = userService.createUser(userRequest)
+		
+		then:
+		thrown ConstraintViolationException
+
+	}
 	
 	@Unroll
 	def "should expect an Exception to be throw for invalid input: email value #emails"(){
@@ -44,11 +71,11 @@ public class UserServiceSpecification extends Specification  {
 	}
 	
 	@Unroll
-	def "should expect save new user #emails"(){
+	def "should expect save new user"(){
 		given:
 		UserSignUpRequest userRequest = new UserSignUpRequest()
 		userRequest.setName("test")
-		userRequest.setEmail(emails)
+		userRequest.setEmail("mail@mail.com")
 		userRequest.setPassword("aa18aaaaF")
 		when:
 		UserSignUpResponse response = userService.createUser(userRequest)
@@ -56,7 +83,23 @@ public class UserServiceSpecification extends Specification  {
 		
 		then:
 		noExceptionThrown()
+		
+	}
+	
+	@Unroll
+	def "should expect an Exception to be throw for invalid input: password value #passwords"(){
+		given:
+		UserSignUpRequest userRequest = new UserSignUpRequest()
+		userRequest.setName("test")
+		userRequest.setEmail("mail@mail.com")
+		userRequest.setPassword(passwords)
+		when:
+		UserSignUpResponse response = userService.createUser(userRequest)
+		
+		then:
+		thrown ConstraintViolationException
+
 		where:
-			emails << ["test@mail.com","emaid@ominio.com"]
+			passwords << ["aa18aaaaf","aaddaaaaf","aa1aaaaf"]
 	}
 }
