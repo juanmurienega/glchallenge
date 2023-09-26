@@ -34,8 +34,8 @@ public class Phone {
     )
 	@Type(type = "uuid-char")
     private UUID id;
-	private String number;
-	private String citycode;
+	private long number;
+	private int citycode;
 	private String contrycode;
 
 }
