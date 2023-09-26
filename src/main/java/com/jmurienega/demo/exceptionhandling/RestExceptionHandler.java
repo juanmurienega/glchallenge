@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.hibernate.exception.ConstraintViolationException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
@@ -26,6 +27,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
     public ResponseEntity<Object> handleUserNotFoundException(CustomUserException exception, WebRequest request){
         return buildResponseEntity(new ApiError(exception));
     }
+	@ExceptionHandler(value = {ConstraintViolationException.class})
+    public ResponseEntity<Object> handleUserNotFoundException(ConstraintViolationException exception, WebRequest request){
+        return buildResponseEntity(new ApiError(7,"El usuario ya existe"));
+    }
+	
 	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {

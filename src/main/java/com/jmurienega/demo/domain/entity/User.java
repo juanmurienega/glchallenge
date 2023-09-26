@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,6 +41,7 @@ public class User {
 	
 	private String name;
 	@NotNull
+	@Column(unique=true)
 	private String email;
 	@NotNull
 	private String password; 
