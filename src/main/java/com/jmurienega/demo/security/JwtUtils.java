@@ -27,24 +27,17 @@ public class JwtUtils {
     @Value("${app.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
-    public String generateToken(String userName) {
+    public String generateToken(String email) {
         
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
         return Jwts.builder()
-        	.setSubject(userName)
+        	.setSubject(email)
             .setIssuedAt(new Date())
             .setExpiration(expiryDate)
             .signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact();
-    }
-    public String getUserUsernameFromJWT(String token) {
-        Claims claims = Jwts.parser()
-            .setSigningKey(jwtSecret)
-            .parseClaimsJws(token)
-            .getBody();
-        return claims.getSubject();
     }
     public boolean validateToken(String authToken) {
         try {
@@ -60,4 +53,11 @@ public class JwtUtils {
         }
         return false;
     }
+	public String getUserEmailFromJWT(String token) {
+		 Claims claims = Jwts.parser()
+		            .setSigningKey(jwtSecret)
+		            .parseClaimsJws(token)
+		            .getBody();
+		 return claims.getSubject();
+	}
 }

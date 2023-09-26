@@ -55,13 +55,13 @@ public class UserService {
 		UserSignUpResponse userCreated = this.modelMapper.map(user, UserSignUpResponse.class);
 		if (userCreated == null)
 			throw new CustomUserException(2,"Error al crear el usuario");
-		userCreated.setToken(jwtUtils.generateToken(newUser.getName()));
+		userCreated.setToken(jwtUtils.generateToken(newUser.getEmail()));
 		return userCreated;
 	}
 
 	public UserLoginResponse login(String token) throws CustomUserException {
-		String userName = jwtUtils.getUserUsernameFromJWT(token);
-		User user = this.userRepository.findByName(userName);
+		String userName = jwtUtils.getUserEmailFromJWT(token);
+		User user = this.userRepository.findByEmail(userName);
 		
 		if (user == null) {
 			
@@ -71,7 +71,7 @@ public class UserService {
 		user.setLastLogin(LocalDateTime.now());
 		this.userRepository.save(user);
 		UserLoginResponse response = this.modelMapper.map(user, UserLoginResponse.class);
-		response.setToken(jwtUtils.generateToken(userName));
+		response.setToken(jwtUtils.generateToken(user.getEmail()));
 		return  response;
 	
 	}

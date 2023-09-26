@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.jmurienega.demo.domain.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	//@Lock(LockModeType.OPTIMISTIC)
 	User findByName(String name);
+	User findByEmail(String email);
 	Boolean existsByName(String name);
 }

@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByName(username);
+		User user = userRepository.findByEmail(username);
         if (user == null)
             throw new UsernameNotFoundException("Invalid username/password");
  
@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 user.isActive(), true, true, true, authorities);
     }
 

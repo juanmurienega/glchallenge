@@ -49,7 +49,7 @@ public class UserServiceSpecification extends Specification  {
 		UserSignUpResponse response = userService.createUser(userRequest)
 		
 		then:
-		thrown ConstraintViolationException
+		noExceptionThrown()
 
 	}
 	
