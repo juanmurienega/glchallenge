@@ -5,6 +5,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,17 +17,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserSignUpResponse {
-	private UUID id;
-
-	private String name; 
-	
+	private UUID id;	
 	private LocalDateTime  created;
-	
 	private LocalDateTime  lastLogin;
-	
-	private boolean isActive; 
-	
 	private String token;
-	
-	private List<PhoneDto> phones;
+	@JsonProperty("isActive")
+	private boolean isActive; 
 }
