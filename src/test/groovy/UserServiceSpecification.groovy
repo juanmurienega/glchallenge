@@ -14,6 +14,7 @@ import org.junit.runner.RunWith
 import org.spockframework.spring.SpringBean
 import com.jmurienega.demo.DemoApplication
 import javax.validation.ConstraintViolationException
+import org.springframework.dao.DataIntegrityViolationException
 
 @SpringBootTest(classes = DemoApplication.class)
 public class UserServiceSpecification extends Specification  {
@@ -75,7 +76,7 @@ public class UserServiceSpecification extends Specification  {
 		given:
 		UserSignUpRequest userRequest = new UserSignUpRequest()
 		userRequest.setName("test")
-		userRequest.setEmail("mail@mail.com")
+		userRequest.setEmail("mailtest@mail.com")
 		userRequest.setPassword("aa18aaaaF")
 		when:
 		UserSignUpResponse response = userService.createUser(userRequest)
@@ -101,5 +102,21 @@ public class UserServiceSpecification extends Specification  {
 
 		where:
 			passwords << ["aa18aaaaf","aaddaaaaf","aa1aaaaf"]
+	}
+	
+	@Unroll
+	def "should expect an Exception to be throw for user duplication"(){
+		given:
+		UserSignUpRequest userRequest = new UserSignUpRequest()
+		userRequest.setName("test")
+		userRequest.setEmail("mail@mail.com")
+		userRequest.setPassword("aa18aaaaF")
+		when:
+		UserSignUpResponse response1 = userService.createUser(userRequest)
+		UserSignUpResponse response2 = userService.createUser(userRequest)
+		then:
+		thrown DataIntegrityViolationException
+
+		
 	}
 }
