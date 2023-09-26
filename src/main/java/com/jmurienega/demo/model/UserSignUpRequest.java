@@ -3,8 +3,6 @@ package com.jmurienega.demo.model;
 import java.util.List;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Pattern.Flag;
@@ -17,6 +15,7 @@ public class UserSignUpRequest {
 	private String name;
 	@NotEmpty(message = "El email es requerido.")
 	@Email(message = "El email es invalido.", flags = { Flag.CASE_INSENSITIVE })
+	@Pattern(regexp=".+@.+\\..+", message="El email es invalido.")
 	private String email;
 	@NotEmpty(message = "El password es requerido.")
 	@Size(min = 8, max = 12, message = "El password debe tener un minimo de 8 caracteres y un maximo de 12 caracteres.")	

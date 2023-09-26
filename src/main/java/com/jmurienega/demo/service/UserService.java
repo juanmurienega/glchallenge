@@ -1,16 +1,17 @@
 package com.jmurienega.demo.service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-import com.jmurienega.demo.domain.entity.Phone;
 import com.jmurienega.demo.domain.entity.User;
 import com.jmurienega.demo.domain.repository.UserRepository;
 import com.jmurienega.demo.exceptionhandling.CustomUserException;
@@ -20,8 +21,9 @@ import com.jmurienega.demo.model.UserSignUpResponse;
 import com.jmurienega.demo.security.JwtUtils;
 
 @Service
+@Validated
 public class UserService {
-	@Autowired
+	@Autowired	
 	private UserRepository userRepository;
 	@Autowired
 	private ModelMapper modelMapper;
@@ -31,7 +33,9 @@ public class UserService {
 	@Autowired
 	private JwtUtils jwtUtils;
 	
-
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
 	public Optional<User> getUserById(Long accountId) {
 		return userRepository.findById(accountId);
@@ -41,10 +45,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public UserSignUpResponse createUser(UserSignUpRequest newUser) throws CustomUserException {
+	public UserSignUpResponse createUser(@Valid UserSignUpRequest newUser) throws CustomUserException {
 		User user = this.modelMapper.map(newUser, User.class);
-		//newUser.getPhones().stream().map(dto -> this.modelMapper.map(dto, Phone.class))
-        //.forEach(user.getPhones()::add);
 		user.setPassword(encoder.encode(newUser.getPassword()));
 		user.setCreated(LocalDateTime.now());
 		user.setLastLogin(LocalDateTime.now());
