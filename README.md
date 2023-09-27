@@ -4,7 +4,7 @@
 ![Spring](https://img.shields.io/badge/springboot-%236DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
 
 
-Chalenge es un microservicio escrito en SpringBoot / Gradle, para la creación y consulta
+Challenge es un microservicio escrito en SpringBoot / Gradle, para la creación y consulta
 de usuarios
 
 ## Requisitos
