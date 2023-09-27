@@ -77,7 +77,7 @@ $ build\reports\tests\test\index.html
 ## Diagramas
 En la carpeta \diagramas se encuentran dos imagenes con los diagramas correspondientes a:
 - [Diagrama de componentes](https://www.plantuml.com/plantuml/duml/ROz1JyCm38Nl_XMXzrxu1HlJf76RA9pG3Y6rkcYf7Jak0o7-E-cYm2XKFVZvVKzvNYMrejCOu4QFEA9nA5D0I_3eDQ1fkYYUXZjcDUiO6m3Oy1YPaDGqw_rzym76F3ybb0sJ2eU0SZ1jMNKehzxXeI9LL_y18oUlBEyNf4CtYTSYjcyEetgcOaLsfpATxJ2Wp3D4wqvso2stf3dNcEyoPN49x8zCMFKdp7zlrRxOb8ExswjG-k7pE8CxrMZQdi_K_ZaIbYTai5qy_n-oh0HNYGBKCeNxvTHoyxT2wgSnV040)
-- Diagrama de secuencia
+- [Diagrama de secuencia](https://www.plantuml.com/plantuml/duml/PP31QiCm343l_WgjfuqI1Zlc40hxWtNx05KHYuiZ6qbEsT_FNc1GUdtloSWwcQDwNLDuyeLN1cAjYL72P_J4S3Z7Rnbg0PQvv2X-24YU5RwC5T2WXeBgaM91SNZFuffJsXtTkJFh5ecxi3lnmILRR8_-TATXHiSB6iFori4IGXqc6g5L3g_M5gebq33PyJW2OKf0okXSZVNv1LRs9S_1MZ1257CKOkWIykNAv5tf28RRZeCEq_ANiZfeldNGPfMzge3mRS_Q63tIcP4yRkWCrhUg_ydLia3_J3YnpEt6lm00)
 
 Los mismos fueron generados usando [Plantuml](https://plantuml.com/es/) y se puede verificar su codigo siguiendo el link correspondiente a cada diagrama.
 
