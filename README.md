@@ -50,12 +50,12 @@ $ gradle -v
 ```
 ## Ejecucion
 
-Para ejecutar el proyecto debe ejecutar una shell y situarse en el directorio raiz del proyecto. Puede validar si esta en esa carpeta si vusualiza el archvio gradlew.
+Para ejecutar el proyecto debe ejecutar una shell y situarse en el directorio raiz del proyecto. Puede validar si esta en esa carpeta si visualiza el archivo gradlew.
 ```sh
 $ gradlew bootRun
 ```
 Espere hasta que aparezca la leyenda _> :bootRun_
-Si el proyecto esta ejecutandose de manera correcta podra visializar las siguientes paginas:
+Si el proyecto esta ejecutandose de manera correcta podra visualizar las siguientes paginas:
 
 - [Swagger](http://localhost:8080/swagger-ui/index.html) - Pagina html de la documentacion de la api
 - [Consola H2](http://localhost:8080/h2-console/) - Consola de H2
@@ -63,7 +63,7 @@ Si el proyecto esta ejecutandose de manera correcta podra visializar las siguien
 Puede probar la api directamente desde swagger o importar la coleccion a postman.
 
 ## Test
-Para ejecutar las pruebas de la aplicacion , se debe ejecutar el siguiente comando:
+Para ejecutar las pruebas de la aplicacion, se debe ejecutar el siguiente comando:
 ```sh
 $ gradlew test -i
 ```
