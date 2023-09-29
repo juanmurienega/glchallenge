@@ -82,5 +82,5 @@ En la carpeta \diagramas se encuentran dos imagenes con los diagramas correspond
 Los mismos fueron generados usando [Plantuml](https://plantuml.com/es/) y se puede verificar su codigo siguiendo el link correspondiente a cada diagrama.
 
 
-##Postman Collection
+## Postman Collection
 [Postman](https://www.postman.com/sagmobile/workspace/test/collection/1695636-930fa264-7c86-4514-9c15-09353583948b?action=share&creator=1695636) Contiene una collection de prueba de la api. Recupera el token luego de hacer sig-up y lo pasa al endpoint login mediante una variable de la coleccion.
